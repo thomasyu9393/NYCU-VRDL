@@ -2,3 +2,4 @@ tqdm
 pandas
 scikit-image
 pycocotools
+tensorboard
