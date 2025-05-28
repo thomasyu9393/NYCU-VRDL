@@ -1,0 +1,9 @@
+pillow
+tqdm
+pandas
+scikit-image
+pycocotools
+tensorboard
+einops
+wandb
+pytorch-msssim
