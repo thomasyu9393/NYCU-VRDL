@@ -9,6 +9,8 @@ The key design of PromptIR lies in its use of prompts—a set of tunable paramet
 
 This prompt-based design enables PromptIR to generalize across diverse degradation types without relying on task-specific branches. As a result, it serves as an effective baseline for our image restoration task. To achieve better performance, we enhance the training process with data augmentation strategies and incorporate various loss functions.
 
+This code is based on the [PromptIR: Prompting for All-in-One Blind Image Restoration (NeurIPS'23)](https://github.com/va1shn9v/PromptIR) repositories.
+
 ### Installation
 ```bash
 git clone https://github.com/thomasyu9393/NYCU-VRDL.git
