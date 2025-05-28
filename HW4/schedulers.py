@@ -1,12 +1,10 @@
 import math
 from collections import Counter
 from torch.optim.lr_scheduler import _LRScheduler
-import torch
 import warnings
 from typing import List
+from torch.optim import Optimizer
 
-from torch import nn
-from torch.optim import Adam, Optimizer
 
 class MultiStepRestartLR(_LRScheduler):
     """ MultiStep with restarts learning rate scheme.
@@ -50,6 +48,7 @@ class MultiStepRestartLR(_LRScheduler):
             for group in self.optimizer.param_groups
         ]
 
+
 class LinearLR(_LRScheduler):
     """
 
@@ -72,6 +71,7 @@ class LinearLR(_LRScheduler):
         weight = (1 - process)
         # print('get lr ', [weight * group['initial_lr'] for group in self.optimizer.param_groups])
         return [weight * group['initial_lr'] for group in self.optimizer.param_groups]
+
 
 class VibrateLR(_LRScheduler):
     """
@@ -115,6 +115,7 @@ class VibrateLR(_LRScheduler):
 
         # print('f {}, T {}, Th {}, t {}, f2 {}'.format(f, T, Th, t, f2))
         return [weight * group['initial_lr'] for group in self.optimizer.param_groups]
+
 
 def get_position_from_periods(iteration, cumulative_period):
     """Get the position from a period list.
@@ -187,6 +188,7 @@ class CosineAnnealingRestartLR(_LRScheduler):
             for base_lr in self.base_lrs
         ]
 
+
 class CosineAnnealingRestartCyclicLR(_LRScheduler):
     """ Cosine annealing with restarts learning rate scheme.
     An example of config:
@@ -219,7 +221,7 @@ class CosineAnnealingRestartCyclicLR(_LRScheduler):
             sum(self.periods[0:i + 1]) for i in range(0, len(self.periods))
         ]
         super(CosineAnnealingRestartCyclicLR, self).__init__(optimizer, last_epoch)
-        
+
     def get_lr(self):
         idx = get_position_from_periods(self.last_epoch,
                                         self.cumulative_period)
@@ -234,7 +236,7 @@ class CosineAnnealingRestartCyclicLR(_LRScheduler):
                 (self.last_epoch - nearest_restart) / current_period)))
             for base_lr in self.base_lrs
         ]
-    
+
 
 class LinearWarmupCosineAnnealingLR(_LRScheduler):
     """Sets the learning rate of each parameter group to follow a linear warmup schedule between warmup_start_lr
